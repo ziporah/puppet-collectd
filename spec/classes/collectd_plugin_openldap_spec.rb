@@ -30,11 +30,11 @@ describe 'collectd::plugin::openldap', type: :class do
 
     it 'Will create /etc/collectd.d/10-openldap.conf' do
       content = <<EOS
-<Plugin "openldap">
-  <Instance "localhost">
-    URL "ldap://localhost/"
-  </Instance>
-</Plugin>
+        <Plugin "openldap">
+          <Instance "localhost">
+            URL "ldap://localhost/"
+          </Instance>
+        </Plugin>
 EOS
       is_expected.to contain_collectd__plugin('openldap').with_content(content)
     end
@@ -67,16 +67,16 @@ EOS
 
     it 'Will create /etc/collectd.d/10-openldap.conf with two :instances params' do
       content = <<EOS
-<Plugin "openldap">
-  <Instance "ldap1">
-    URL "ldap://ldap1.example.com"
-  </Instance>
-  <Instance "ldap2">
-    URL "ldap://ldap2.example.com"
-    BindDN "cn=Monitor"
-    Password "password"
-  </Instance>
-</Plugin>
+        <Plugin "openldap">
+          <Instance "ldap1">
+            URL "ldap://ldap1.example.com"
+          </Instance>
+          <Instance "ldap2">
+            URL "ldap://ldap2.example.com"
+            BindDN "cn=Monitor"
+            Password "password"
+          </Instance>
+        </Plugin>
 EOS
       is_expected.to contain_collectd__plugin('openldap').with_content(content)
     end
@@ -99,9 +99,11 @@ EOS
     end
 
     it 'Will create /etc/collectd.d/10-openldap.conf' do
-      is_expected.to contain_file('openldap.load').with(ensure: 'present',
-                                                        path: '/etc/collectd.d/10-openldap.conf',
-                                                        content: %r{^  Interval 15})
+      is_expected.to contain_file('openldap.load').with(
+        ensure: 'present',
+        path: '/etc/collectd.d/10-openldap.conf',
+        content: %r{^  Interval 15}
+      )
     end
   end
 
@@ -119,8 +121,10 @@ EOS
     end
 
     it 'Will not create /etc/collectd.d/10-openldap.conf' do
-      is_expected.to contain_file('openldap.load').with(ensure: 'absent',
-                                                        path: '/etc/collectd.d/10-openldap.conf')
+      is_expected.to contain_file('openldap.load').with(
+        ensure: 'absent',
+        path: '/etc/collectd.d/10-openldap.conf'
+      )
     end
   end
 end

@@ -64,7 +64,6 @@ describe 'collectd::plugin::genericjmx::mbean', type: :define do
     it { is_expected.to contain_concat__fragment(concat_fragment_name).without_content(%r{(.*InstanceFrom.*){2,}}) }
   end
 
-
   # testing the Value template section is going to be messy
   context 'with defined default_values_args' do
     let(:default_values_args) do

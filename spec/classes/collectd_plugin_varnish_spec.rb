@@ -20,10 +20,10 @@ describe 'collectd::plugin::varnish', type: :class do
 
     it 'renders the template with the default values' do
       content = <<EOS
-<Plugin varnish>
-  <Instance "localhost">
-  </Instance>
-</Plugin>
+        <Plugin varnish>
+          <Instance "localhost">
+          </Instance>
+        </Plugin>
 EOS
       is_expected.to contain_collectd__plugin('varnish').with_content(content)
     end
@@ -43,10 +43,10 @@ EOS
 
     it 'renders the template with the default values' do
       content = <<EOS
-<Plugin varnish>
-  <Instance "localhost">
-  </Instance>
-</Plugin>
+        <Plugin varnish>
+          <Instance "localhost">
+          </Instance>
+        </Plugin>
 EOS
       is_expected.to contain_collectd__plugin('varnish').with_content(content)
     end
@@ -69,10 +69,10 @@ EOS
 
       it 'renders the template with the default values' do
         content = <<EOS
-<Plugin varnish>
-  <Instance "localhost">
-  </Instance>
-</Plugin>
+          <Plugin varnish>
+            <Instance "localhost">
+            </Instance>
+          </Plugin>
 EOS
         is_expected.to contain_collectd__plugin('varnish').with_content(content)
       end
@@ -91,12 +91,12 @@ EOS
 
       it 'renders the template with the values passed in the params' do
         content = <<EOS
-<Plugin varnish>
-  <Instance "warble">
-    BATMAN true
-    Robin false
-  </Instance>
-</Plugin>
+          <Plugin varnish>
+            <Instance "warble">
+              BATMAN true
+              Robin false
+            </Instance>
+          </Plugin>
 EOS
         is_expected.to contain_collectd__plugin('varnish').with_content(content)
       end

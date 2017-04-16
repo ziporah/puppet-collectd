@@ -16,27 +16,27 @@ describe 'collectd::plugin::ceph', type: :class do
     end
 
     content = <<EOS
-<Plugin ceph>
-  LongRunAvgLatency false
-  ConvertSpecialMetricTypes true
+      <Plugin ceph>
+        LongRunAvgLatency false
+        ConvertSpecialMetricTypes true
 
-  <Daemon "ceph-osd.0">
-    SocketPath "/var/run/ceph/ceph-osd.0.asok"
-  </Daemon>
-  <Daemon "ceph-osd.1">
-    SocketPath "/var/run/ceph/ceph-osd.1.asok"
-  </Daemon>
-  <Daemon "ceph-osd.2">
-    SocketPath "/var/run/ceph/ceph-osd.2.asok"
-  </Daemon>
-  <Daemon "test-osd.0">
-    SocketPath "/var/run/ceph/test-osd.0.asok"
-  </Daemon>
-  <Daemon "ceph-mon.mon01">
-    SocketPath "/var/run/ceph/ceph-mon.mon01.asok"
-  </Daemon>
+        <Daemon "ceph-osd.0">
+          SocketPath "/var/run/ceph/ceph-osd.0.asok"
+        </Daemon>
+        <Daemon "ceph-osd.1">
+          SocketPath "/var/run/ceph/ceph-osd.1.asok"
+        </Daemon>
+        <Daemon "ceph-osd.2">
+          SocketPath "/var/run/ceph/ceph-osd.2.asok"
+        </Daemon>
+        <Daemon "test-osd.0">
+          SocketPath "/var/run/ceph/test-osd.0.asok"
+        </Daemon>
+        <Daemon "ceph-mon.mon01">
+          SocketPath "/var/run/ceph/ceph-mon.mon01.asok"
+        </Daemon>
 
-</Plugin>
+      </Plugin>
 EOS
     it 'Will create /etc/collectd.d/10-ceph.conf' do
       is_expected.to contain_collectd__plugin('ceph').with_content(content)
@@ -49,8 +49,10 @@ EOS
     end
 
     it 'Will not create /etc/collectd.d/10-ceph.conf' do
-      is_expected.to contain_file('ceph.load').with(ensure: 'absent',
-                                                    path: '/etc/collectd.d/10-ceph.conf')
+      is_expected.to contain_file('ceph.load').with(
+        ensure: 'absent',
+        path: '/etc/collectd.d/10-ceph.conf'
+      )
     end
   end
 
@@ -72,8 +74,10 @@ EOS
     end
 
     it 'Will manage collectd-ceph' do
-      is_expected.to contain_package('collectd-ceph').with(ensure: 'present',
-                                                           name: 'collectd-ceph')
+      is_expected.to contain_package('collectd-ceph').with(
+        ensure: 'present',
+        name: 'collectd-ceph'
+      )
     end
   end
 
@@ -94,8 +98,10 @@ EOS
     end
 
     it 'Will not manage collectd-ceph' do
-      is_expected.not_to contain_package('collectd-ceph').with(ensure: 'present',
-                                                               name: 'collectd-ceph')
+      is_expected.not_to contain_package('collectd-ceph').with(
+        ensure: 'present',
+        name: 'collectd-ceph'
+      )
     end
   end
 
@@ -116,8 +122,10 @@ EOS
     end
 
     it 'Will not manage collectd-ceph' do
-      is_expected.not_to contain_package('collectd-ceph').with(ensure: 'present',
-                                                               name: 'collectd-ceph')
+      is_expected.not_to contain_package('collectd-ceph').with(
+        ensure: 'present',
+        name: 'collectd-ceph'
+      )
     end
   end
 
