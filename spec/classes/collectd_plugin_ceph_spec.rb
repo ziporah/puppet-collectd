@@ -14,6 +14,7 @@ describe 'collectd::plugin::ceph', type: :class do
     let :params do
       { daemons: ['ceph-osd.0', 'ceph-osd.1', 'ceph-osd.2', 'test-osd.0', 'ceph-mon.mon01'] }
     end
+
     content = <<EOS
 <Plugin ceph>
   LongRunAvgLatency false
@@ -46,6 +47,7 @@ EOS
     let :params do
       { daemons: ['ceph-osd.0', 'ceph-osd.1', 'ceph-osd.2'], ensure: 'absent' }
     end
+
     it 'Will not create /etc/collectd.d/10-ceph.conf' do
       is_expected.to contain_file('ceph.load').with(ensure: 'absent',
                                                     path: '/etc/collectd.d/10-ceph.conf')
@@ -68,6 +70,7 @@ EOS
         daemons: ['ceph-osd.0']
       }
     end
+
     it 'Will manage collectd-ceph' do
       is_expected.to contain_package('collectd-ceph').with(ensure: 'present',
                                                            name: 'collectd-ceph')
@@ -89,6 +92,7 @@ EOS
         daemons: ['ceph-osd.0']
       }
     end
+
     it 'Will not manage collectd-ceph' do
       is_expected.not_to contain_package('collectd-ceph').with(ensure: 'present',
                                                                name: 'collectd-ceph')
@@ -110,6 +114,7 @@ EOS
         daemons: ['ceph-osd.0']
       }
     end
+
     it 'Will not manage collectd-ceph' do
       is_expected.not_to contain_package('collectd-ceph').with(ensure: 'present',
                                                                name: 'collectd-ceph')
@@ -120,6 +125,7 @@ EOS
     let :params do
       { daemons: 'ceph-osd.0' }
     end
+
     it 'Will raise an error about :daemons being a String' do
       is_expected.to compile.and_raise_error(%r{String})
     end
